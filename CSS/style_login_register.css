@@ -1,0 +1,401 @@
+
+
+
+#contt
+{
+    position: absolute;
+    top:40%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    
+    /* top: calc(5ch ); */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    padding:40px;
+    box-sizing: border-box;
+    background-color: rgba(255,255,255,0.4)   ;
+
+        
+    
+}
+
+
+form
+{
+    width: 100%;
+}
+
+#contt h1
+{
+    color: black;
+    text-align: center;
+    margin:30px auto;
+    font-size: 40px;
+}
+#contt .inputbox
+{
+    position: relative;
+    padding-left:30px;
+}
+#contt .inputbox input
+{
+    border:none;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid blue;
+    outline:none;
+    background-color: rgba(255,255,255,0.4)   ;
+
+}
+#contt .inputbox label
+{
+    position: absolute;
+    top:0;
+    left:30px;
+    padding: 10px 0;
+    font-size: 16px;
+    transition: .5s;
+    pointer-events: none;
+    color: black;
+}
+#contt .inputbox input:focus+label,#contt .inputbox input:valid+label
+{
+    top:-30px;
+    left:30px;
+    color: #03a9f4;
+    font-size:14px;
+}
+div.icon
+{
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width:20px;
+    height: 20px;
+    font-size:20px;
+    margin-right: 10px;
+    color: black;
+}
+
+
+#contt a, #cont input[type="checkbox"]
+{
+    cursor: pointer;
+}
+#contt input[type="submit"]
+{
+    border:1px solid black;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;    
+    padding: 10px 134px 10px 134px;
+    border: 1px solid black;
+    
+
+    
+    
+}
+
+.inputbox span
+{
+    position: absolute;
+    position: absolute;
+    top: 15px;
+    right: 0;
+}
+#eye2
+{
+    display: none;
+}
+#eye1
+{
+    display: block;
+}
+@media only screen and (max-width: 768px) {
+    #contt
+    {
+        width: 300px;
+     
+    }
+    #contt input[type="submit"]
+    {
+        padding: 10px 100px 10px 80px;
+
+    }
+}
+
+/*HOME.CSS*/
+/* 
+
+
+
+
+
+HEHE
+
+
+
+
+
+
+
+
+
+
+*/
+
+/*HEADER ZONE*/
+/* body{
+    display: block;
+    color: #555;
+    
+    
+}
+a:hover{
+    color: rgb(255, 166, 0);
+    text-decoration: none;
+}
+a{
+    color: white;
+}
+ul{
+    list-style: none;
+}
+
+
+.header{
+    background-color: black;
+    margin-bottom: 0px;
+    display: block;
+}
+.header .menu {
+    text-align: right;
+    height: 30px;
+    width: 100%;
+    padding-top: 5px;
+    overflow: hidden;
+
+}
+.header .menu li{
+   display: inline-block;
+   margin-top: 0px;
+   
+   padding: 0 10px;
+   text-align: center;
+}
+.header a{
+    color: white;
+ 
+}
+
+.header a:link{
+    text-decoration: none;
+    color: white;
+}
+.header a:hover{
+    color: orangered;
+}
+ul{ 
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-start: 0px;
+    padding-inline-start: 0px;
+}
+ul, ol {
+    margin-top: 0px;
+    margin-bottom: 0px;
+} */
+/*NAV*/
+/* .navbar
+{
+    height: 100px;
+}
+.navbar{
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.dropdown{
+    display: inline-block;
+    position: static;
+
+    height: 100%;
+}
+.dropdown-content{
+
+    display: none!important;
+    position: relative;
+    background-color: gray;
+    margin-top: 0px;
+    padding: 0px 0px 12px 16px;
+    border-radius: 10px;
+    width: 100%;
+    border:none
+  
+  
+  }
+  .dropdown:hover>.dropdown-content {
+    display:block!important;
+}
+.dropdown:hover>.dropdown-toggle::after
+    {
+        transform: rotate(180deg);
+    }
+    .dropdown:hover>.nav-link{
+        color: orange!important;
+    }
+   
+    .dropdown:hover>a {
+        color: orange;
+    }
+    .dropdown-item:hover  {
+        background-color: gray;
+    }
+    .dropdown a{
+        font-weight: bolder;
+        color: whitesmoke;
+        font-size: 2vw;
+    }
+    .dropdown>a:link{
+        text-decoration: none;
+        color: whitesmoke;
+    }
+    .dropdown a:hover{
+        color: orange;
+        text-decoration: none;
+        
+    }
+    
+    .dropdown-menu, .dropdown-item{
+        position: relative;
+        
+    }
+   
+@media only screen and (min-width: 768px){
+    
+    .arrow
+    {
+    background-color: aliceblue;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    transform: rotate(45deg);
+    background-color:gray;
+    top: 0;
+    border-radius: 0px !important;
+    }
+    
+    
+}
+.box-link{
+
+    justify-content: center;
+    align-items: center;
+    margin  : 0 10px 0 0;
+    color: black;
+    font-size: 9vw;
+    
+}
+.box-link:link{
+    text-decoration: none;
+    color: black;
+}
+.box-link:hover{
+    color: orange;
+}
+
+.nav-link{
+    color: black!important;
+}
+
+.search, .search-text, .btn{
+    border: none;
+    background-color: white;
+    border-radius: 20px;
+    
+    
+    
+}
+.search
+{
+    width: 16vw;
+    position: relative;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: auto;
+    border: 1px solid;
+    
+    
+}
+.search-text
+{
+    width: 70%!important;
+    margin: 0;
+    padding-right: 10px;
+    font-size: 1vw;
+}
+.icon-search
+{
+    width:20%;
+    padding-left: 5px;
+    
+}
+
+.icon-search:hover{
+    background-color: gray;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+    .navbar-brand img {
+      width: calc(10vw + 16px);
+      height: calc(10vw + 16px);
+    }
+    .navbar{
+        padding-left: 1rem!important;
+        padding-right: 1rem!important;
+
+    }
+   
+    #navbarNavDropdown>li{
+      
+        background-color: gray;
+        display: absolute!important;
+        padding-top: 0px!important;
+        padding-bottom: 0px!important;
+        margin-top:0px!important ;
+   
+    }
+    #navbarNavDropdown>li>a{
+      
+        background-color: gray;
+        display: absolute!important;
+        padding-top: 0px!important;
+        padding-bottom: 0px!important;
+        margin-top:0px!important ;
+   
+    }
+    .container{
+        padding:20px;
+    }
+    #cont input[type="submit"]  {
+      
+    padding: 10px 155px 10px 155px;
+    }
+}
+
+.navbar
+{
+    height: 100px;
+} */
