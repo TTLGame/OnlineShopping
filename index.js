@@ -1,10 +1,23 @@
-const http = require('http');
+var express = require('express')
+var app = express()
 
-const server = http.createServer(function(req,res){
-
-    
-    res.end();
-});
-server.listen(5000,function(){
-    console.log('Http server is listening on port 5000');
+app.get('/',function(req,res){
+    res.render('Home')
+})
+app.use(express.static(__dirname))
+var hbs = require('express-handlebars')
+app.engine('hbs',hbs({
+    extname:'hbs',
+    defaultLayout:'layout',
+    layoutsDir: __dirname + '/views/layouts/',
+    partialsDir:__dirname + '/views/partials/'
+}))
+app.set('view engine','hbs')
+app.set('port',(process.env.PORT|| 5000))
+// user route
+var user_route = require('./Routes/User')
+app.use('/User',user_route)
+//
+app.listen(app.get('port'),function(){
+    console.log("Listening ",+ app.get('port'))
 })

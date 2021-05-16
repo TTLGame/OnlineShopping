@@ -6,10 +6,7 @@
    font-weight: bold;
 }
 .ITEM:hover{
-    font-size: 110%;
-}
-.ITEM:hover img{
-    transform: scale(1.05);
+    font-size: 130%;
 }
 .ITEM a:hover{
     color: orange !important;
