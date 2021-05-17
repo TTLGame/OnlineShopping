@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="/CSS/Travel.css">
+<div class="container travel hldash pt-3">
+    <ul class="d-inline-flex row ">
+        <li class="d-flex align-items-end">
+            <a class="mr-2" href="/">Trang chủ</a>
+        </li>
+        
+        <li class="d-flex align-items-end font-weight-bold">
+            Kiểm tra đơn hàng
+            </li>
+    </ul>
+</div>
+
+<div class="container">
+  <div class="card " >
+    <img src="/img/delivery.jpg" alt="" class="card-img" id="Card">
+
+    <div class="card-img-overlay container ">
+      
+      <form action="/Check-order/verifyorder" id="input">
+      <h1 class="text-dark text-center"  style="font-size: 36px;" >TRA CỨU ĐƠN HÀNG</h1>
+        <div class="form-group my-5">
+    
+          <input type="text" class="form-control" id="usr" name="order_id" placeholder="MÃ ĐƠN HÀNG" required>
+        </div>
+        <div class="form-group my-5">
+
+          <input type="text" class="form-control" id="pwd" name="info" placeholder="Email/Số Điện Thoại" required>
+        </div>
+        <button type="submit" class="btn btn-primary bg-info "style="padding: 10px 100px 10px 100px">TÌM KIẾM</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  setTimeout(function(){ var tmp=document.getElementById("Card");
+
+  var tmp1=document.getElementById("input");
+  // console.log(Math.floor(tmp.offsetHeight/2));
+
+  tmp1.style.marginTop= (Math.floor(tmp.clientHeight/6)) +"px";
+  
+  $(window).resize(function () {
+    
+
+
+  tmp1.style.marginTop= (Math.floor(tmp.clientHeight/6)) +"px";
