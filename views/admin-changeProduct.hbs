@@ -1,0 +1,198 @@
+
+{{!-- add button --}}
+<div class="container p-3 ">
+    <div class="row justify-content-end">
+        <form action="/User/Admin" class="form-inline col-12 search pl-5 pt-1 pl-1 m-2 justify-content-between" method ="GET"> 
+            <input name = "search" class="form-control search-text shadow-none col-11" type="search" placeholder=" Search" aria-label="Search">
+            <button class="btn p-0 " type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+    <div class="container text-center  ">
+        <button id="Add" type="button" onclick=Add_new_product_GUI_checkID() class="btn text-light bg-primary border-dark m-0 p-2 " style="font-size: 20px; border-radius:100px;">
+                Thêm sản phẩm
+        </button>           
+        <div id="add_product" class="d-none container hl2dash p-2">
+            
+            <form action = '/User/Admin/UpdateProduct' method ="GET" class="ml-2 mt-2">
+      
+                <input style = "display:none" type = "text" name ="returnPath" id = "returnPath" value ="{{returnPath}}">
+                
+               <h3>Nhập ID cho sản phẩm mới</h3>
+                        <input type = "text" name ='Enter_id' id = "Add_id" placeholder="ID"required > <br>
+              
+                <div class="col mt-3">
+                    <button id="Add_new_product" type="submit" class=" p btn bg-primary text-light" > Confirm Add</button>
+                    <button id="Cancel_new_product" class=" btn bg-danger text-light"  type="button" onclick=cancel_add_product()> Cancel</button>
+                </div>
+           
+            </form>
+        </div>
+    </div>
+    {{!-- search --}}
+  
+</div>
+
+
+
+<script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+<script>
+    if ("{{congrats}}" != "") {
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: '{{congrats}}',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+</script>
+
+{{!-- container --}}
+<div class="container mt-3 mb-3">
+   
+    <div class="row jusify-content-between">
+        <div id="product_contain" class=" col-lg-12 mt-3 p-0">
+            <!--ITEM-->
+            {{#each products}}
+            <div class="products container mb-3 bg-light" store="{{id}}">
+                <div class="row">
+                    <div class="col-md-4 text-center p-0 m-0 d-flex justify-content-start">
+                        <img src="/{{main_img}}" alt="Item" height="215px">
+                    </div>
+                    <div class="col">
+                        <div class="row p-1 justify-content-center  ">
+                            <h5 class="col p-0 m-0 hldash text-center">{{name}}</h5>
+
+                        </div>
+                        <div class="row p-1">
+                            <p class="p-0 m-0">ID: {{id}} - {{category}}</p>
+                        </div>
+
+                        <div class="total row p-1 text-warning">
+
+                        </div>
+                        <script>
+                            var index = {{@index}}
+
+                            var products_tagname = document.getElementsByClassName('products')
+                            var product_id = products_tagname[index].attributes.store.value
+                            var total_products = 0 
+                        </script>
+                        {{#each ../size_stock}}
+                        <script>
+
+                            if ("{{ProductId}}" == product_id) {
+                                total_products += parseInt("{{ stock }}")
+                            }
+                        </script>
+                        {{/each}}
+                        <script>
+                            var total = document.getElementsByClassName('total')
+                            
+                            total[index].insertAdjacentHTML('beforeend', `<p class="p-0 m-0">Chỉ còn ${total_products} sản phẩm</p>`)
+                        </script>
+                        <div class="row p-1 justify-content-between ">
+
+                            <div class="col p-0 m-0">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="row justify-content p-0 m-0">
+                                            <button
+                                                class="update_pro pr-2  bg-light text-primary font-weight-bolder p-0 pr-4"
+                                                jobs="update_pro" store_id="{{id}}" style="border:none">Sửa</button>
+                                            <button class="delete_pro  bg-light text-primary  font-weight-bolder"
+                                                jobs="delete_pro" store_id="{{id}}" style="border:none; ">Xóa</button>
+                                        </div>
+                                    </div>
+                                    <p class="Money_format col-3 text-center align-content-center p-0 m-0"
+                                        style="border-radius:1000px; font-size: 15px;"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                // money fommat
+                var m_format = document.getElementsByClassName("Money_format")
+
+                var price = {{ price }}
+
+                price = price.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                m_format[index].innerHTML = price + " VND"
+            </script>
+            {{/each}}
+        </div>
+    </div>
+</div>
+<div id="hi"></div>
+<script>
+    // quan li san pham
+    var add_btn = document.getElementById("Add");
+    var add_menu = document.getElementById("add_product")
+    function Add_new_product_GUI_checkID() {
+
+        const item =`
+      <form action = '/User/Admin/UpdateProduct' method ="GET" class="ml-5 mt-4">
+      
+      <input style = "display:none" type = "text" name ="returnPath" id = "returnPath" value ="{{returnPath}}">
+      <label for="Add_id" class="text-dark">Nhập ID:</label>
+      <input type = "text" name ='Enter_id' id = "Add_id" placeholder="ID"required > <br>
+      
+      <button id="Add_new_product" type="submit" class=" p-3  " > Confirm Add</button>
+      <button id="Cancel_new_product" class=" p-3"  type="button" onclick=cancel_add_product()> Cancel</button>
+    </form>
+    
+    `;
+        add_btn.disabled = true;
+        add_btn.classList.add("d-none");
+        add_menu.classList.remove("d-none");
+
+    }
+    function Check_Id() {
+        var entered_id = document.getElementById('Add_id')
+
+        for (let i = 0; i < products_tagname.length; i++) {
+            if (products_tagname[i].attributes.store.value == entered_id.value) {
+                cancel_add_product()
+            }
+        }
+
+    }
+    function cancel_add_product() {
+        add_btn = document.getElementById("Add");
+        add_btn.disabled = false;
+        add_btn.classList.remove("d-none");
+        add_menu.classList.add("d-none");
+
+    }
+    var product_contain = document.getElementById('product_contain')
+    product_contain.addEventListener("click", function (ToDo) {
+        const child = ToDo.target
+        const job = child.attributes.jobs.value
+        console.log(job)
+        const store_id = child.attributes.store_id.value
+        if (job != undefined) {
+            if (job == "update_pro") {
+                window.location.href = `/User/Admin/UpdateProduct?returnPath={{returnPath}}&Enter_id=${store_id}&NoWarning=true`
+            }
+            else {
+                Swal.fire({
+                    title: 'Bạn chắc chắn muốn xóa sản phẩm không?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Tiếp tục',
+                    cancelButtonText: 'Hủy'
+
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        
+                        window.location.href = `/User/Admin/DeleteProduct?returnPath={{returnPath}}&Enter_id=${store_id}`
+                    }
+                })
+            }
+        }
+    })
+</script>
