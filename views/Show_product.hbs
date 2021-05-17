@@ -1,0 +1,749 @@
+<link rel="stylesheet" href="/CSS/Home.css">
+<link rel="stylesheet" href="/CSS/Sell.css">
+<link rel="stylesheet" href="/CSS/Show1Product.css">
+<link rel="stylesheet" href="/CSS/Travel.css">
+<link rel="stylesheet" href="/CSS/Review.css">
+<script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+<script>
+    if ("{{congrats}}" != "") {
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: '{{congrats}}',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+</script>
+
+{{!-- modal image --}}
+<div id="img_modal">
+    <span id="close">&times;</span>
+    <img id="img_content">
+</div>
+<div class="container travel hldash pt-3">
+    <ul class="d-inline-flex row ">
+        <li class="d-flex align-items-end">
+            <a class="mr-2" href="/">Trang chủ</a>
+        </li>
+        <li class="d-flex align-items-end">
+            <a class="mr-2" href="/Product">Sản phẩm</a>
+        </li>
+        <li class="d-flex align-items-end font-weight-bold">
+            {{product.id}}
+        </li>
+    </ul>
+</div>
+<div class="container-fluid ">
+    <div class="contaier-fluid container-lg pt-4 " style="background-color: white;">
+        <div class="row ">
+            <div class="col-lg mr-3">
+
+                <div class="row "><img id="main_img" src="/{{product.main_img}}" class="img-fluid" alt="giay">
+                </div>
+                <!--  -->
+                <div class="row ">
+                    <div id="product_aspect" class="carousel slide text-center mt-5 " data-ride="carousel">
+                        <div id="img_zone" class="carousel-inner d-flex align-items-center">
+
+
+                        </div>
+                        <a class="carousel-control-prev text-dark" href="#product_aspect" role="button"
+                            data-slide="prev">
+                            <i class="fa fa-chevron-left" style="font-size: 30px;"></i>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next text-dark" href="#product_aspect" role="button"
+                            data-slide="next">
+                            <i class="fa fa-chevron-right" style="font-size: 30px;"></i>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+                <!--  -->
+            </div>
+            {{#with product}}
+            <div class="col-lg  h-100 text-dark">
+                <div class="row hldash flex-column">
+                    <div class="col">
+                        <h1 class="Product-name mb-5">
+                            {{name}}
+                        </h1>
+                    </div>
+                    <div class="col d-inline-flex justify-content-between">
+                        <p class="mb-5">Mã sản phẩm: <strong>{{id}}</strong></p>
+                        <p class="mb-5">Tình trạng: <strong>New Arrival</strong></p>
+                    </div>
+                    <div id="Money_format" class="col mb-5 text-primary font-weight-bolder" style="font-size:30px ;">
+
+                    </div>
+                </div>
+                <div class="row hldash">
+                    <p class=" my-5 pl-3">{{info}}</p>
+                </div>
+
+                <div class="row hldash flex-column mt-5">
+                    <div class="col d-inline-flex justify-content-between">
+                        <!-- Size and quantity                        -->
+                        <div class=" text-center">
+                            <h4 class="font-weight-bold">Size</h4>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle text-light bg-dark" type="button"
+                                    id="display_size" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    style="width: 100px;">
+
+                                </button>
+                                <div class="dropdown-menu py-0 " aria-labelledby="dropdownMenuButton"
+                                    style="width: 100px;border-radius: 0px;">
+                                    <div id="size_menu" class="row dropdown-item text-danger mx-auto d-inline-flex p-0">
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        {{!-- <div id="Show_stock" class="align-self-end">LOng</div> --}}
+                        <div class="text-center">
+                            <h4 class="font-weight-bold">Số lượng</h4>
+                            <span>
+                                <button id="subtract_quantity" class="text-light bg-dark"
+                                    style="width: 35px;height: 35px; border-top-left-radius:20px; border-bottom-left-radius:20px;font-size:large">-</button>
+
+                                <span class=" text-dark font-weight-bolder border border-5 border-dark p-1"
+                                    type="button" id="quantity" style="width: 100px;">
+                                    0
+                                </span>
+
+                                <button id="add_quantity" class="text-light bg-dark"
+                                    style="width: 35px;height: 35px;border-top-right-radius:20px; border-bottom-right-radius:20px;font-size:larger;">+</button>
+                            </span>
+
+                        </div>
+                        <!--  -->
+
+                    </div>
+
+                    <form action="/Cart/UpdateCart" method="GET" onsubmit="return check()">
+                        {{!-- returnPath and ID --}}
+                        <input style="display:none" name="returnPath" type="text" id="Add_returnPath"
+                            value="{{../returnPath}}" required>
+                        <input style="display:none" name="id" type="text" id="set_id" value="{{id}}" required>
+                        {{!-- size and quantity --}}
+                        <div id="size_quantity"></div>
+
+                        {{!-- submit button --}}
+                        <div class="col d-inline-flex justify-content-between text-center">
+                            <button type="submit" name="submit" value="Add_cart"
+                                class="confirm_btn my-3 py-3 bg-dark text-light col-9 font-weight-bolder ">
+                                THÊM VÀO GIỎ HÀNG</button>
+                            <a href="/Mark/UpdateMark?id={{id}}&returnPath={{../returnPath}}"
+                                class="confirm_btn my-3 py-3 bg-dark text-light font-weight-bolder col-2"><i
+                                    class="fa fa-heart"></i>
+                            </a>
+                        </div>
+                        <div class="col d-inline-flex justify-content-between text-center">
+                            <button id="Pay" type="submit" name="submit" value="Pay"
+                                class="confirm_btn col text-light font-weight-bolder py-3 mb-5"
+                                style="background-color:rgb(241,94,44);">THANH TOÁN</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="row hldash flex-column my-5">
+                    <p>Gender: {{gender}}<br>
+                        {{#if ../check}}
+                        Size run: 35 – 46<br>
+                        {{else}}
+                        Size run: S - XXL<br>
+                        {{/if}}
+                        Brand: {{brand}}<br>
+                        Category: {{category}}<br>
+                    </p>
+                    {{#if ../check}}
+                    <img src="/img/Size-chart.jpg" class="img-fluid " alt="size chart">
+                    {{/if}}
+                </div>
+            </div>
+            {{/with}}
+        </div>
+
+    </div>
+</div>
+<script>
+    var relative_product = []
+</script>
+{{#each products}}
+<script>
+    var product_id = '{{id}}'
+    var total_products = 0 
+</script>
+{{#each ../size_stocks}}
+<script>
+
+    if ("{{ProductId}}" == product_id) {
+        total_products += parseInt("{{ stock }}")
+    }
+</script>
+{{/each}}
+<script>
+
+    relative_product.push({
+        id: "{{id}}",
+        name: "{{name}}",
+        category: "{{category}}",
+        price: "{{price}}",
+        main_img: "{{main_img}}",
+        stock: total_products
+    })
+</script>
+
+{{/each}}
+
+<!--COMMENT-->
+<script>
+    var comments = []
+</script>
+{{#each comment}}
+<script>
+    comments.push({
+        content: "{{content}}",
+        star: "{{star}}",
+        createdAt: "{{createdAt}}",
+        UserId: "{{UserId}}"
+    })
+</script>
+{{/each}}
+
+<h1 class=" font-weight-bold container BottomLine my-3">Đánh giá sản phẩm</h1>
+<div class="container p-0" style="background-color: white;">
+
+    <div class="container-fluid py-5">
+        <div class="row">
+            <div class="col-lg-3 d-flex flex-column justify-content-center align-items-center">
+                <h1>{{star}}</h1>
+                <ul id="total_star" class="list-inline ReviewStar">
+
+                </ul>
+                <script>
+                    var star_display = Math.round(parseFloat("{{star}}"))
+                    var star_item = ``
+                    for (let i = 0; i < star_display; i++) {
+                        star_item += `<li class="list-inline-item"><i class="fa fa-star" aria-hidden="true"></i></li>`
+                    }
+                    if (star_display != 5) {
+                        for (let i = 0; i < 5 - star_display; i++) {
+                            star_item += `<li class="list-inline-item"><i class="fa fa-star ReviewStar-None" aria-hidden="true"></i></li>`
+                        }
+                    }
+                    document.getElementById("total_star").insertAdjacentHTML("beforeend", star_item)
+                </script>
+                <p>{{total_comment}} đánh giá</p>
+            </div>
+
+            <div class="col-lg">
+                <div id="5star" class="ReviewStar">
+
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        </li>
+                        <li class="list-inline-item">
+                            <input class="MyRange" type="range" id="points" name="points" min="0"
+                                max="{{total_comment}}" value="star_5" disabled>
+                        </li>
+                        <li class="list-inline-item">
+                            {{star_5}}
+                        </li>
+                    </ul>
+
+                </div>
+                <div id="4star" class="ReviewStar">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star ReviewStar-None" aria-hidden="true"></i>
+                        </li>
+                        <li class="list-inline-item">
+                            <input class="MyRange" type="range" id="points" name="points" min="0"
+                                max="{{total_comment}}" value="{{star_4}}" disabled>
+                        </li>
+                        <li class="list-inline-item">
+                            {{star_4}}
+                        </li>
+                    </ul>
+
+
+
+                </div>
+                <div id="3star" class="ReviewStar">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star ReviewStar-None" aria-hidden="true"></i>
+                            <i class="fa fa-star ReviewStar-None" aria-hidden="true"></i>
+                        </li>
+                        <li class="list-inline-item">
+                            <input class="MyRange" type="range" id="points" name="points" min="0"
+                                max="{{total_comment}}" value="{{star_3}}" disabled>
+                        </li>
+                        <li class="list-inline-item">
+                            {{star_3}}
+                        </li>
+                    </ul>
+
+
+                </div>
+                <div id="2star" class="ReviewStar">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star ReviewStar-None" aria-hidden="true"></i>
+                            <i class="fa fa-star ReviewStar-None" aria-hidden="true"></i>
+                            <i class="fa fa-star ReviewStar-None" aria-hidden="true"></i>
+                        </li>
+                        <li class="list-inline-item">
+                            <input class="MyRange" type="range" id="points" name="points" min="0"
+                                max="{{total_comment}}" value="{{star_2}}" disabled>
+                        </li>
+                        <li class="list-inline-item">
+                            {{star_2}}
+                        </li>
+                    </ul>
+
+
+                </div>
+                <div id="1star" class="ReviewStar">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <i class="fa fa-star " aria-hidden="true"></i>
+                            <i class="fa fa-star ReviewStar-None" aria-hidden="true"></i>
+                            <i class="fa fa-star ReviewStar-None" aria-hidden="true"></i>
+                            <i class="fa fa-star ReviewStar-None " aria-hidden="true"></i>
+                            <i class="fa fa-star ReviewStar-None" aria-hidden="true"></i>
+                        </li>
+                        <li class="list-inline-item">
+                            <input class="MyRange" type="range" id="points" name="points" min="0"
+                                max="{{total_comment}}" value="{{star_1}}" disabled>
+                        </li>
+                        <li class="list-inline-item">
+                            {{star_1}}
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <h2 class="px-5">Bình luận ({{total_comment}})</h2>
+    <div id="comment_list" class="container px-5 ChatList">
+    </div>
+    <div class="row justify-content-center">
+        <button id="display_more" type="button" class=" btn bg-primary text-light" onclick=showComment()>
+
+        </button>
+    </div>
+</div>
+<script>
+    var comment_index = 0
+    var comment_end = 0
+    if (comment_index + 5 >= comments.length) {
+        comment_end = comments.length
+        document.getElementById("display_more").classList.add("d-none")
+    }
+    else {
+        comment_end += 5
+
+        document.getElementById("display_more").innerHTML = `Tải thêm ${comments.length - comment_end} bình luận`
+    }
+    //
+
+    for (comment_index; comment_index < comment_end; comment_index++) {
+        var comment_item = ``
+        comment_item += `
+        <div class="row px-5 my-3 ">
+            <div class="container DevidedCmt ">
+                <div class="row">
+                    <ul class="list-inline ">
+                        <li class="list-inline-item">
+                            <h4 class="font-weight-bold"><i class="fa fa-user"></i> ${comments[comment_index].UserId} </h4>
+                        </li>
+                        <li class="list-inline-item ">`
+        var date = new Date(comments[comment_index].createdAt)
+        comment_item +=
+            `<i>Đánh giá ngày ${date.getDate()} tháng ${date.getMonth() + 1} năm ${date.getFullYear()}</i>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <ul class="list-inline">
+                        <li class="list-inline-item ReviewStar">`
+
+        for (let i = 0; i < parseInt(comments[comment_index].star); i++) {
+
+            comment_item += `<i class="fa fa-star" aria-hidden="true"></i>`
+        }
+
+        for (let i = 0; i < 5 - parseInt(comments[comment_index].star); i++) {
+            comment_item += ` <i class="fa fa-star ReviewStar-None" aria-hidden="true"></i>`
+        }
+
+        comment_item += ` 
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="row p-3">
+                    ${comments[comment_index].content}
+                </div>
+            </div>
+        </div>
+        `
+        document.getElementById("comment_list").insertAdjacentHTML("beforeend", comment_item)
+    }
+    // show-list button
+
+    function showComment() {
+        if (comment_index + 5 >= comments.length) {
+            comment_end = comments.length
+            document.getElementById("display_more").classList.add("d-none")
+        }
+        else {
+            comment_end += 5
+            document.getElementById("display_more").innerHTML = `Tải thêm ${comments.length - comment_end}`
+        }
+        //
+
+        for (comment_index; comment_index < comment_end; comment_index++) {
+            var comment_item = ``
+            comment_item += `
+        <div class="row px-5 my-3 ">
+            <div class="container DevidedCmt ">
+                <div class="row">
+                    <ul class="list-inline ">
+                        <li class="list-inline-item">
+                            <h4 class="font-weight-bold"><i class="fa fa-user"></i> ${comments[comment_index].UserId} </h4>
+                        </li>
+                        <li class="list-inline-item ">`
+            var date = new Date(comments[comment_index].createdAt)
+            comment_item +=
+                `<i>Đánh giá ngày ${date.getDate()} tháng ${date.getMonth() + 1} năm ${date.getFullYear()}</i>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <ul class="list-inline">
+                        <li class="list-inline-item ReviewStar">`
+
+            for (let i = 0; i < parseInt(comments[comment_index].star); i++) {
+
+                comment_item += `<i class="fa fa-star" aria-hidden="true"></i>`
+            }
+
+            for (let i = 0; i < 5 - parseInt(comments[comment_index].star); i++) {
+                comment_item += ` <i class="fa fa-star ReviewStar-None" aria-hidden="true"></i>`
+            }
+
+            comment_item += ` 
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="row p-3">
+                    ${comments[comment_index].content}
+                </div>
+            </div>
+        </div>
+        `
+            document.getElementById("comment_list").insertAdjacentHTML("beforeend", comment_item)
+        }
+    }
+
+</script>
+<!---->
+<h1 class="container-fluid text-center mt-5 mb-5 font-weight-bold p-2">SẢN PHẨM LIÊN QUAN</h1>
+<div id="SPLIENQUAN" class="carousel slide text-center mb-5" data-ride="carousel">
+    <div id="relative_carousel" class="carousel-inner ">
+    </div>
+    <a class="carousel-control-prev text-dark" href="#SPLIENQUAN" role="button" data-slide="prev">
+        <i class="fa fa-chevron-left" style="font-size: 40px;"></i>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next text-dark" href="#SPLIENQUAN" role="button" data-slide="next">
+        <i class="fa fa-chevron-right" style="font-size: 40px;"></i>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<script>
+    var image_url = []
+</script>
+{{#each img_src}}
+<script>
+    image_url.push('{{img_src}}')
+
+</script>
+{{/each}}
+<script>
+    var img_zone = document.getElementById("img_zone")
+    // show carousel ------------------------------------------------
+    var check_cal = false
+    var count = 0
+    var product_left = -1
+    while (product_left < image_url.length - 1) {
+        if (check_cal == false) {
+            img_zone.insertAdjacentHTML("beforeend", `<div class="carousel-item active mb-5">
+                                <div  class="Product_cal row justify-content-center">
+
+                                </div>
+                            </div>`)
+        }
+        else {
+            img_zone.insertAdjacentHTML("beforeend", `<div class="carousel-item mb-5">
+                                <div  class="Product_cal row justify-content-center">
+
+                                </div>
+                            </div>`)
+        }
+        var Product_cal = document.getElementsByClassName("Product_cal")
+        if (product_left + 4 >= image_url.length - 1) {
+
+            if (check_cal == true) {
+                product_left = image_url.length - 5
+            }
+            for (let i = product_left + 1; i < image_url.length; i++) {
+                product_left++
+
+                Product_cal[count].insertAdjacentHTML("beforeend", ` <div class="col-md-2 col-3  " style="border:none">
+                            <img style ="cursor:pointer" src="/${image_url[i]}" alt="" class="img_carousel img-fluid card-img-top">
+                        </div>`)
+            }
+        }
+        else {
+            for (let i = 0; i < 4; i++) {
+                product_left++
+
+                Product_cal[count].insertAdjacentHTML("beforeend", ` <div class="col-md-2 col-3  " style="border:none">
+                            <img style ="cursor:pointer" src="/${image_url[product_left]}" alt="" class="img_carousel img-fluid card-img-top">
+                        </div>`)
+            }
+        }
+        count++
+        check_cal = true
+    }
+    //show relavtive carousel-------------------------------------------
+    var relative_carousel = document.getElementById("relative_carousel")
+    var check_cal = false
+    var count = 0
+    var product_left = -1
+    while (product_left < relative_product.length - 1) {
+        if (check_cal == false) {
+            relative_carousel.insertAdjacentHTML("beforeend", ` <div class="carousel-item active">
+                                    <div class="relative_pro_cal row justify-content-center">
+
+                                </div>
+                            </div>`)
+        }
+        else {
+            relative_carousel.insertAdjacentHTML("beforeend", `<div class="carousel-item">
+                                    <div class="relative_pro_cal row justify-content-center">
+
+                                </div>
+                            </div>`)
+        }
+        var Product_cal = document.getElementsByClassName("relative_pro_cal")
+        if (product_left + 4 >= relative_product.length - 1) {
+            if (check_cal == true) {
+                product_left = relative_product.length - 5
+            }
+            for (let i = product_left + 1; i < relative_product.length; i++) {
+                product_left++
+                var price = parseFloat(relative_product[product_left].price)
+                price = price.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                var relative_item = `
+                <div class="col-md-2 col-3 m-1 p-0  bg-light " style="border-radius: 10px;">
+                    <a href="/Show-product/${relative_product[product_left].id}"><img src="/${relative_product[product_left].main_img}" alt="" class="img-fluid card-img-top"></a>
+                    <div class="card-body ITEM text-center  ">
+                        <div class=" text-center m-0">
+                            <h5>
+                                <a href="="/Show-product/${relative_product[product_left].id}">${relative_product[product_left].name}
+                        `
+                if (parseInt(relative_product[product_left].stock) == 0) {
+                    relative_item += `<span class="text-danger"> - Hết hàng</span>`
+                }
+                relative_item += `</a>
+                            </h5>
+                            <p class="p-0 m-0">${relative_product[product_left].category}</p>
+                        </div>
+                        <p class="Price m-0">${price} VND</p>
+                        <a class="btn"><i class="fa fa-heart fa-2x"></i></a>`
+                if (parseInt(relative_product[product_left].stock) != 0) {
+                    relative_item += `
+                        <a class="btn"><i class="fa fa-shopping-cart fa-2x"></i></a>`
+                    relative_item += `
+                    </div>
+                </div>`
+                }
+
+                Product_cal[count].insertAdjacentHTML("beforeend", relative_item)
+            }
+        }
+        else {
+            for (let i = 0; i < 4; i++) {
+                product_left++
+                var price = parseFloat(relative_product[product_left].price)
+                price = price.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+                var relative_item = `
+                <div class="col-md-2 col-3 m-1 p-0  bg-light " style="border-radius: 10px;">
+                    <a href="/Show-product/${relative_product[product_left].id}"><img src="/${relative_product[product_left].main_img}" alt="" class="img-fluid card-img-top"></a>
+                    <div class="card-body ITEM text-center  ">
+                        <div class=" text-center m-0">
+                            <h5>
+                                <a href="="/Show-product/${relative_product[product_left].id}">${relative_product[product_left].name}
+                        `
+                if (parseInt(relative_product[product_left].stock) == 0) {
+                    relative_item += `<span class="text-danger"> - Hết hàng</span>`
+                }
+                relative_item += `</a>
+                            </h5>
+                            <p class="p-0 m-0">${relative_product[product_left].category}</p>
+                        </div>
+                        <p class="Price m-0">${price} VND</p>
+                        <a class="btn"><i class="fa fa-heart fa-2x"></i></a>`
+                if (parseInt(relative_product[product_left].stock) != 0) {
+                    relative_item += `
+                        <a class="btn" href ="/Cart/UpdateCart?id=${relative_product[product_left].id}&returnPath={{returnPath}}&submit=product_submit"><i class="fa fa-shopping-cart fa-2x"></i></a>`
+                }
+                relative_item += `
+                    </div>
+                </div>`
+
+
+                Product_cal[count].insertAdjacentHTML("beforeend", relative_item)
+            }
+        }
+        count++
+        check_cal = true
+    }
+    // money format ----------------------------------------------------
+    var m_format = document.getElementById("Money_format")
+    var price = {{ product.price }}
+    price = price.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+    const item = `
+        <strong>${price} VND</strong> `
+    m_format.insertAdjacentHTML("beforeend", item)
+
+    // img_carousel click
+
+    img_zone.addEventListener("click", function (ToDo) {
+        const child = ToDo.target
+        const img_src = child.attributes.src.value
+        let main_img = document.getElementById("main_img")
+        main_img.src = img_src
+
+    })
+    // img modal -------------------------------------
+    var modal = document.getElementById("img_modal")
+    var main_img = document.getElementById("main_img")
+    var modal_img = document.getElementById("img_content")
+
+    main_img.onclick = function () {
+        modal.style.display = "block"
+        modal_img.src = this.src;
+
+    }
+    var close_btn = document.getElementById("close")
+    close_btn.onclick = function () {
+        modal.style.display = "none"
+    }
+    // menu_size
+    var size_menu = document.getElementById("size_menu")
+
+</script>
+
+{{#each size_stock}}
+<script>
+    var size = "{{size}}"
+    var stock = "{{stock}}"
+    var item1 = `
+    <button value = "${stock}"class="col-lg-3 col-md-3 col-sm-6 m-1 p-0 ">${size}</button>`
+    if (parseInt(stock) != 0) {
+        size_menu.insertAdjacentHTML("beforeend", item1)
+    }
+</script>
+
+{{/each}}
+<script>
+    var display_size = document.getElementById("display_size")
+    var quantity = document.getElementById("quantity")
+    var set_stock = 0
+    var set_quanity
+    var set_size
+    size_menu.addEventListener("click", function (ToDo) {
+        const child = ToDo.target
+        const temp = child.innerHTML
+        set_stock = parseInt(child.attributes.value.value)
+        display_size.innerHTML = temp
+        set_size = temp
+        quantity.innerHTML = 1
+        set_quanity = 1
+        quantity.style.color = "black"
+
+    })
+    // add and substract  quantity
+    var add_quantity = document.getElementById("add_quantity")
+    var subtract_quantity = document.getElementById("subtract_quantity")
+
+    add_quantity.onclick = function () {
+        let temp = parseInt(quantity.innerHTML)
+        if (temp < set_stock) {
+            temp++
+            quantity.innerHTML = temp
+            if (temp == set_stock) {
+                quantity.style.color = "red"
+            }
+        }
+        set_quanity = temp
+
+    }
+    subtract_quantity.onclick = function () {
+        let temp = quantity.innerHTML
+        if (temp > 1) {
+            temp--
+            quantity.innerHTML = temp
+            quantity.style.color = "black"
+        }
+        set_quanity = temp
+
+    }
+    function check() {
+        var size_quantity = document.getElementById("size_quantity")
+
+        if (set_quanity == undefined && set_size == undefined) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Xin hãy chọn số lượng và kích cỡ',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            return false
+        }
+        size_quantity.insertAdjacentHTML("beforeend", `
+         <input style="display:none" name="size" type="text" id="set_size" value="${display_size.innerHTML}" required>
+        <input style="display:none" name="quantity" type="text" id="set_quantity" value="${quantity.innerHTML}" required>`)
+        return true
+    }
+
+</script>
