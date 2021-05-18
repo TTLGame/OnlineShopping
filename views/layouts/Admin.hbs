@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en-US">
+  <title>Triple Long Store</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--BOOTSTRAP HERE-->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!--Font Awesome-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!--MY CSS AND JS-->
+  <link rel="stylesheet" href="/CSS/Home.css">
+  <link rel="stylesheet" href="/CSS/Sell.css">
+  <link rel="stylesheet" href="/CSS/Travel.css">
+  <link rel="stylesheet" href="/CSS/ProductSelect.css">
+  <style>
+  <style>
+    .tr a:link {
+      color: blue !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!--header-->
+  {{> header}}
+  <!--/header-->
+  <!--contain-->
+  <link rel="stylesheet" href="/CSS/Admin.css">
+  {{!-- modal image --}}
+
+  <div id="modal">
+    <span id="close">&times;</span>
+    <div id="modalcontent"></div>
+  </div>
+  
+  <div class="container mb-5 pb-5">
+    <div class="row" id="NAV_LEFT">
+      <div class="col-md-3 col-sm-12 justify-content-center  box-dash p-2 mb-3 " style="border-color:white ">
+        <div class=" card-header text-center py-2 ">
+          <div class="row   bottomline p-1  justify-content-center collapsed " data-toggle="collapse" href="#back" aria-expanded="false">
+            <h4 class=" p-0 m-0  font-weight-bold" style="cursor: pointer;">Thông tin cá nhân </h4>
+          </div>
+          <div id="back" class="collapse show  font-weight-bold" data-parent="#back">
+            <div class="card-body ">
+              <ul class=" justify-content-center  ">
+                <li class="row  justify-content-center">
+                  <a href="/User/Profile">Quay về </a>
+                </li>
+               
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class=" card-header text-center py-2">
+          <div class="row   bottomline  p-1 justify-content-center " data-toggle="collapse" href="#DT">
+            <h4 class=" p-0 m-0  font-weight-bold" style="cursor: pointer;">Sản phẩm </h4>
+          </div>
+          <div id="DT" class="collapse show  font-weight-bold" data-parent="#DT">
+            <div class="card-body ">
+              <ul class=" justify-content-center  ">
+                <li class="row  justify-content-center">
+                  <a href="/User/Admin">Tồn Kho </a>
+                </li>
+                <li class="row     justify-content-center">
+                  <a href="/User/Admin/OutofStock">Hết hàng</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class=" card-header    text-center py-2 ">
+          <div class="row  bottomline p-1 justify-content-center" data-toggle="collapse" href="#Loai">
+            <h4 class=" p-0 m-0  font-weight-bold" style="cursor: pointer;"> Đơn hàng </h4>
+          </div>
+          <div id="Loai" class="collapse  show font-weight-bold" data-parent="#Loai">
+            <div class="card-body ">
+              <ul class=" justify-content-center  ">
+                <li class="row  justify-content-center">
+                  <a href="/User/Admin/check-order">Tất cả</a>
+                </li>
+                <li class="row   justify-content-center">
+                  <a href="/User/Admin/check-order?finish=false">Chưa hoàn thành</a>
+                </li>
+                <li class="row    justify-content-center">
+                  <a href="/User/Admin/check-order?finish=true">Đã hoàn thành</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class=" card-header   text-dar text-center py-2  ">
+          <div class="row bottomline p-1 justify-content-center" data-toggle="collapse" href="#TH">
+            <h4 class=" p-0 m-0  font-weight-bold" style="cursor: pointer;"> Mã khuyến mãi </h4>
+          </div>
+          <div id="TH" class="collapse show  font-weight-bold" data-parent="#TH">
+            <div class="card-body ">
+              <ul class=" justify-content-center  ">
+                <li class="row   justify-content-center">
+                  <a href="/User/Admin/voucher">Tất cả</a>
+                </li>
+                <li class="row   justify-content-center">
+                  <a href="/User/Admin/voucher?available=true">Sử dụng được</a>
+                </li>
+                <li class="row   justify-content-center">
+                  <a href="/User/Admin/voucher?available=false">Chưa áp dụng</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class=" card-header   text-dar text-center py-2  ">
+          <div class="row bottomline p-1 justify-content-center" data-toggle="collapse" href="#KH">
+            <h4 class=" p-0 m-0  font-weight-bold" style="cursor: pointer;">Khách Hàng </h4>
+          </div>
+          <div id="KH" class="collapse show  font-weight-bold" data-parent="#KH">
+            <div class="card-body ">
+              <ul class=" justify-content-center  ">
+                <li class="row   justify-content-center">
+                  <a href="/User/Admin/ManageUser">Tất cả</a>
+                </li>
+                <li class="row   justify-content-center">
+                  <a href="/User/Admin/ManageUser?admin=true">Admin</a>
+                </li>
+                <li class="row   justify-content-center">
+                  <a href="/User/Admin/ManageUser?admin=false">thường</a>
+                </li>
+
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9 col-sm-12 bg-light " style="border-left-width: 2px !important;border-bottom-width: 2px !important;">
+        {{{body}}}
+      </div>
+    </div>
+  </div>
+  <!--/contain-->
+  <!--footer-->
+  {{> footer}}
+  <!--/footer-->
+</body>
+
+</html>

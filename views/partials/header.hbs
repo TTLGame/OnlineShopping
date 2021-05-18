@@ -49,16 +49,20 @@
       function myFunction() {
         var element = document.getElementsByClassName("fixed");
         console.log(element)
+
         if (element.length == 0) {
           element = document.getElementsByTagName("header");
           console.log(element[0])
           element[0].classList.add("fixed")
+
         }
         else {
           element = document.getElementsByTagName("header");
           console.log(element[0])
           element[0].classList.remove("fixed")
         }
+
+
       }
     </script>
 
@@ -288,11 +292,18 @@
   </div>
 
   <script>
+
     var ele = document.getElementById("head");
     var con = document.getElementById("cont");
+
+
     con.style.marginTop = ele.offsetHeight + 'px'
+
     $(window).resize(function () {
+
       con.style.marginTop = ele.offsetHeight + 'px'
+
+
       //resize just happened, pixels changed
     });
   </script>
@@ -399,6 +410,7 @@
   var big_top_nav = document.getElementById('Big-Top-nav')
   var small_top_nav = document.getElementById('Small-Top-nav')
   var check = '{{usercheck}}'
+
   var item1, item2
   if (check == '') {
     item1 = `
@@ -406,6 +418,7 @@
           <a href="/User/Login"><i class="fa fa-user"></i> Đăng nhập</a>
         </li>
       `
+
     item2 = `
         <a class="card-header  mb-3  hldash" href="/User/Login">
             <h3 style="cursor:pointer">ĐĂNG NHẬP</h3>
@@ -430,6 +443,8 @@
           </a>
         `
   }
+
   big_top_nav.insertAdjacentHTML("beforeend", item1)
   small_top_nav.insertAdjacentHTML("beforeend", item2)
+
 </script>
