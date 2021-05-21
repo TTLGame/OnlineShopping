@@ -116,7 +116,7 @@ ul, ol {
     font-size: 20px;
 }
 .NavContentDropdown1 img { 
-    border-radius: 100px;
+    border-radius: 0px;
     opacity: 1; 
     -webkit-transition: opacity .1s ease-in-out;
     -moz-transition: opacity .1s ease-in-out;
@@ -140,7 +140,7 @@ ul, ol {
 }
 .dropdown-content{
     box-shadow: 0px 0px 3px #000000;
-    background-color: rgb(219, 219, 219);
+    background-color: rgb(122, 122, 122);
     margin-top: -8px;    
     display: none!important;
     position: relative;
@@ -172,7 +172,7 @@ ul, ol {
     }
     .dropdown a{
         font-weight: bolder;
-        color: black;
+        color: white;
 
     }
     .item-dropdown
@@ -183,7 +183,7 @@ ul, ol {
     }
     .dropdown>a:link{
         text-decoration: none;
-        color: black;
+        color: white;
     }
     .dropdown a:hover{
         color: orange;
@@ -210,7 +210,7 @@ ul, ol {
     margin-left: auto;
     margin-right: auto;
     transform: rotate(45deg);
-    background-color: rgb(219, 219, 219);
+    background-color: rgb(122, 122, 122);
     border-radius: 0px !important;
     }
     
