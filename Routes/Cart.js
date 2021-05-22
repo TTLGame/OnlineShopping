@@ -66,6 +66,25 @@ router.get("/ChangeCart", function (req, res) {
     req.session.user_pay = user_pay
     res.redirect("/Cart")
 })
+
+// router.get("/ChangeCart", function (req, res) {
+//     if (req.session.cart == undefined) {
+//         req.session.cart = []
+//     }
+//     if (req.session.mark == undefined) {
+//         req.session.mark = []
+//     }
+//     var user_pay = {
+//         name: req.query.name,
+//         phone: req.query.phone,
+//         address: req.query.address,
+//         discount: "#" + req.query.discount,
+//     }
+
+//     req.session.user_pay = user_pay
+//     res.redirect("/Cart")
+// })
+
 router.get("/UpdateCart", function (req, res) {
     if (req.session.cart == undefined) {
         req.session.cart = []
